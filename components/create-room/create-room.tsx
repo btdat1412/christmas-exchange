@@ -159,7 +159,7 @@ const CreateRoom = async () => {
     ],
   });
 
-  return <CreateRoomButton roomPin={room.pin} hostId = {host.id} />;
+  return <CreateRoomButton roomPin={room.pin} hostPin = {host.pinUser} />;
 };
 
 export default CreateRoom;
