@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { db } from "../../lib/db";
 import CreateRoomButton from "./create-room-button";
 
