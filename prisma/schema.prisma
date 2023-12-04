@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model users {
+  id      Int     @id @default(autoincrement())
+  pinUser String? @unique
+  giveTo  String? 
+  name    String
+  avatar  String? @db.Text
+  isHost  Boolean @default(false)
+  roomId  Int?
+  room    rooms?  @relation(fields: [roomId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+  @@index([roomId], name: "idx_roomId_users")
+}
+
+model rooms {
+  id     Int     @id @default(autoincrement())
+  pin    String  @unique
+  hostId Int?
+  users  users[] 
+
+  isClosed  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("rooms")
+}
